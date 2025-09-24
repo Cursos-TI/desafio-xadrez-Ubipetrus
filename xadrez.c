@@ -1,81 +1,96 @@
-#include <stdio.h>
 
-/*
-    Desafio: Movimentando as Peças do Xadrez
-    ----------------------------------------
-    - Torre: mover 5 casas para a direita (usando for)
-    - Bispo: mover 5 casas na diagonal (cima e direita) (usando while)
-    - Rainha: mover 8 casas para a esquerda (usando do-while)
-*/
+ #include <stdio.h>
 
+// ===============================
+// Funções Recursivas
+// ===============================
+
+// Movimento da Torre (para cima)
+void moverTorre(int casas) {
+    if (casas <= 0) return; // Caso base
+    printf("Cima\n");
+    moverTorre(casas - 1); // Chamada recursiva
+}
+
+// Movimento da Rainha (direita)
+void moverRainha(int casas) {
+    if (casas <= 0) return; // Caso base
+    printf("Direita\n");
+    moverRainha(casas - 1); // Chamada recursiva
+}
+
+// Movimento do Bispo (diagonal superior direita)
+// Recursão + loops aninhados
+void moverBispo(int casas) {
+    if (casas <= 0) return; // Caso base
+
+    // Loop externo: movimento vertical
+    for (int i = 0; i < 1; i++) {
+        printf("Cima\n");
+
+        // Loop interno: movimento horizontal
+        for (int j = 0; j < 1; j++) {
+            printf("Direita\n");
+        }
+    }
+
+    moverBispo(casas - 1); // Chamada recursiva
+}
+
+// ===============================
+// Movimento do Cavalo com loops complexos
+// ===============================
+
+void moverCavalo() {
+    int movimentosCima = 2;     // Duas casas para cima
+    int movimentosDireita = 1;  // Uma casa para a direita
+
+    printf("Movimento do Cavalo:\n");
+
+    // Dois loops aninhados, simulando múltiplas variáveis
+    for (int i = 0, j = 0; i < movimentosCima || j < movimentosDireita; ) {
+        if (i < movimentosCima) {
+            printf("Cima\n");
+            i++;
+            continue; // volta para o loop, priorizando o movimento "Cima"
+        }
+
+        if (j < movimentosDireita) {
+            printf("Direita\n");
+            j++;
+        } else {
+            break; // encerra o loop quando terminou o "L"
+        }
+    }
+}
+
+// ===============================
+// Função principal
+// ===============================
 int main() {
-    // Quantidade de casas que cada peça vai se mover
-    int casasTorre = 5;
-    int casasBispo = 5;
-    int casasRainha = 8;
-
-    // ========================
-    // Movimento da TORRE (for)
-    // ========================
+    // Torre: 3 casas para cima
     printf("Movimento da Torre:\n");
-    for (int i = 1; i <= casasTorre; i++) {
-        printf("Direita (%d)\n", i);
-    }
+    moverTorre(3);
 
+    // Linha em branco
     printf("\n");
 
-    // ==========================
-    // Movimento do BISPO (while)
-    // ==========================
-    printf("Movimento do Bispo:\n");
-    int j = 1;
-    while (j <= casasBispo) {
-        printf("Cima, Direita (%d)\n", j);
-        j++;
-    }
-
-    printf("\n");
-
-    // ===============================
-    // Movimento da RAINHA (do-while)
-    // ===============================
+    // Rainha: 3 casas para direita
     printf("Movimento da Rainha:\n");
-    int k = 1;
-    do {
-        printf("Esquerda (%d)\n", k);
-        k++;
-    } while (k <= casasRainha);
+    moverRainha(3);
 
-        // ===============================
-    // Movimento do Cavalo
-    // ===============================
-    printf("\nMovimento do Cavalo:\n");
+    // Linha em branco
+    printf("\n");
 
-    // O cavalo se move 2 casas para baixo e 1 casa para a esquerda
-    int movimentosBaixo = 2;
-    int movimentosEsquerda = 1;
+    // Bispo: 3 casas em diagonal
+    printf("Movimento do Bispo:\n");
+    moverBispo(3);
 
-    // Loop externo (for): controla o movimento para baixo
-    for (int i = 0; i < movimentosBaixo; i++) {
-        printf("Baixo\n");
-    }
+    // Linha em branco
+    printf("\n");
 
-    // Loop interno (while): controla o movimento para esquerda
-    int j = 0;
-    while (j < movimentosEsquerda) {
-        printf("Esquerda\n");
-        j++;
-    }
-
+    // Cavalo
+    moverCavalo();
 
     return 0;
 }
-// O que esse código faz
-Torre: usa um for para andar 5 vezes para a direita.
-
-Bispo: usa um while para andar 5 vezes na diagonal (cima + direita).
-
-
-
-
-Rainha: usa um do-while para andar 8 vezes para a esquerda.
